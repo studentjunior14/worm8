@@ -754,3 +754,102 @@ body {
 #store-buy-button:hover {
   background-color: #a4d070;
 }
+
+/* CLOTHING STORE STYLES */
+
+.wear-types {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  width: 60px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wear-types li {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  cursor: pointer;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.wear-types li.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #ff9800;
+}
+
+#wear-eyes-button {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white"><circle cx="30" cy="50" r="15"/><circle cx="70" cy="50" r="15"/><circle cx="30" cy="50" r="5" fill="black"/><circle cx="70" cy="50" r="5" fill="black"/></svg>');
+}
+
+#wear-mouths-button {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="5"><path d="M20,60 Q50,90 80,60"/></svg>');
+}
+
+#wear-glasses-button {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="5"><circle cx="30" cy="50" r="20"/><circle cx="70" cy="50" r="20"/><line x1="50" y1="50" x2="50" y2="50" stroke-width="2"/><line x1="50" y1="50" x2="50" y2="50"/></svg>');
+}
+
+#wear-hats-button {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="white"><rect x="20" y="60" width="60" height="10"/><rect x="30" y="30" width="40" height="30"/></svg>');
+}
+
+.wear-view-cont {
+  position: absolute;
+  top: 0;
+  left: 90px;
+  right: 0;
+  bottom: 60px;
+}
+
+#wear-view-canv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#wear-view-prev,
+#wear-view-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#wear-view-prev {
+  left: 0;
+  transform: translateY(-50%) scale(-1, 1);
+}
+
+#wear-view-next {
+  right: 0;
+}
+
+#wear-view-prev svg,
+#wear-view-next svg {
+  width: 100%;
+  height: 100%;
+  stroke: #ff9800;
+  transition: stroke 0.2s;
+}
+
+#wear-view-prev svg:hover,
+#wear-view-next svg:hover {
+  stroke: #ffc107;
+}

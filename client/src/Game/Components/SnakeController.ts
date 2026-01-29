@@ -4,6 +4,7 @@ import { Vector2 } from "../../Engine/Vector2";
 import { WORLD_SIZE, GAME_SETTINGS } from "../../constants";
 import * as PIXI from 'pixi.js';
 import { NetworkManager } from "../NetworkManager";
+import { AccessoryManager } from "../../Managers/AccessoryManager";
 
 export class SnakeController extends Component {
     public static allSnakes: SnakeController[] = [];
@@ -38,6 +39,10 @@ export class SnakeController extends Component {
     // Magnet Effect
     private magnetGraphic: PIXI.Graphics | null = null;
     private magnetTimer: number = 0;
+
+    // Accessory
+    private accessorySprite: PIXI.Sprite | null = null;
+    private accessoryConfig: any = null;
 
     start(): void {
         this.magnetGraphic = new PIXI.Graphics();
@@ -287,6 +292,30 @@ export class SnakeController extends Component {
                 headGlow.rotation = head.rotation;
             }
             visualIndex = 1;
+
+            // --- ACCESSORY UPDATE ---
+            if (this.accessorySprite && this.accessoryConfig && this.accessorySprite.visible) {
+                this.accessorySprite.position.set(head.x, head.y); // Relative to container
+                this.accessorySprite.rotation = head.rotation;
+
+                // Apply local offset rotated
+                const offX = this.accessoryConfig.offset.x;
+                const offY = this.accessoryConfig.offset.y;
+                // Rotate offset
+                const cos = Math.cos(head.rotation);
+                const sin = Math.sin(head.rotation);
+                const rX = offX * cos - offY * sin;
+                const rY = offX * sin + offY * cos;
+
+                this.accessorySprite.x += rX;
+                this.accessorySprite.y += rY;
+
+                // Ensure Scale matches Snake Width
+                // Base snake width is around 35-40 visually? settings say 40?
+                // Let's use relative scaling
+                const baseScale = this.width / 40.0; // Assuming 40 is standard
+                this.accessorySprite.scale.set(this.accessoryConfig.scale.x * baseScale, this.accessoryConfig.scale.y * baseScale);
+            }
         }
 
         for (let i = 0; i < this.pathHistory.length - 1; i++) {
@@ -340,5 +369,35 @@ export class SnakeController extends Component {
         const idx = SnakeController.allSnakes.indexOf(this);
         if (idx > -1) SnakeController.allSnakes.splice(idx, 1);
         this.gameObject.destroy();
+    }
+
+    public setAccessory(id: number) {
+        if (id <= 0) {
+            if (this.accessorySprite) this.accessorySprite.visible = false;
+            this.accessoryConfig = null;
+            return;
+        }
+
+        const manager = AccessoryManager.instance;
+        if (!manager) return;
+
+        const config = manager.getAccessoryConfig(id);
+        const texture = manager.getTexture(id);
+
+        if (config && texture) {
+            this.accessoryConfig = config;
+            if (!this.accessorySprite) {
+                this.accessorySprite = new PIXI.Sprite(texture);
+                this.gameObject.container.addChild(this.accessorySprite);
+                this.accessorySprite.zIndex = 100; // Top
+            } else {
+                this.accessorySprite.texture = texture;
+                this.accessorySprite.visible = true;
+            }
+            this.accessorySprite.anchor.set(config.anchor.x, config.anchor.y);
+            // Dynamic scaling based on snake width (approx 40 is standard)
+            const baseScale = this.width / 40.0;
+            this.accessorySprite.scale.set(config.scale.x * baseScale, config.scale.y * baseScale);
+        }
     }
 }

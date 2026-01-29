@@ -6,10 +6,15 @@ import { SnakeController } from "./Game/Components/SnakeController";
 import { WORLD_SIZE, GAME_SETTINGS } from "./constants";
 import { FoodManager } from "./Game/Managers/FoodManager";
 import { NetworkManager } from "./Game/NetworkManager";
+import { AccessoryManager } from "./Managers/AccessoryManager";
 
 (async () => {
     try {
         console.log("Initializing Game...");
+
+        // Init managers
+        new AccessoryManager();
+        await AccessoryManager.instance.init();
 
         // --- GLOBAL VARIABLES ---
         let isGameRunning = false;
@@ -147,10 +152,10 @@ import { NetworkManager } from "./Game/NetworkManager";
                     gameObjects.push(go);
                     snake = ctrl;
 
-                    if (ctrl.isPlayer) {
-                        playerController = ctrl;
-                        cameraTarget = go;
-                    }
+                    playerController = ctrl;
+                    cameraTarget = go;
+                    // Set Accessory
+                    ctrl.setAccessory(AccessoryManager.instance.getAccessoryId());
                 }
                 snake.updateFromServer(sData);
             });
@@ -625,11 +630,12 @@ import { NetworkManager } from "./Game/NetworkManager";
         btnStore.addEventListener('click', () => { storeOverlay.style.display = 'block'; showStoreView(); });
         if (btnBack) btnBack.addEventListener('click', () => { skinsView.style.display === 'block' ? showStoreView() : storeOverlay.style.display = 'none'; });
         if (btnGoSkins) btnGoSkins.addEventListener('click', showSkinsView);
-        if (btnGoWear) btnGoWear.addEventListener('click', () => alert("Clothing store coming soon!"));
+        if (btnGoWear) btnGoWear.addEventListener('click', showWearView);
         if (btnGoCoins) btnGoCoins.addEventListener('click', () => alert("Coins store coming soon!"));
 
         function showStoreView() { storeView.style.display = 'block'; skinsView.style.display = 'none'; wearView.style.display = 'none'; coinsView.style.display = 'none'; }
-        function showSkinsView() { storeView.style.display = 'none'; skinsView.style.display = 'block'; renderCategories(); if (CATEGORIES.length > 0) selectCategory(CATEGORIES[0]); }
+        function showSkinsView() { storeView.style.display = 'none'; skinsView.style.display = 'block'; wearView.style.display = 'none'; renderCategories(); if (CATEGORIES.length > 0) selectCategory(CATEGORIES[0]); }
+        function showWearView() { storeView.style.display = 'none'; skinsView.style.display = 'none'; wearView.style.display = 'block'; coinsView.style.display = 'none'; AccessoryManager.instance.selectCategory('glasses'); }
         function renderCategories() {
             storeGroupsList.innerHTML = '';
             CATEGORIES.forEach(cat => {

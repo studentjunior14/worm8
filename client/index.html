@@ -127,7 +127,45 @@
                   </div>
 
                   <!-- PLACEHOLDERS for other views -->
-                  <div id="wear-view" class="base-popup-view" style="display: none;"></div>
+                  <div id="wear-view" class="base-popup-view" style="display: none;">
+                    <ul class="wear-types">
+                      <li id="wear-eyes-button" data-category="eyes"></li>
+                      <li id="wear-mouths-button" data-category="mouths"></li>
+                      <li id="wear-glasses-button" data-category="glasses"></li>
+                      <li id="wear-hats-button" data-category="hats"></li>
+                    </ul>
+
+                    <div class="wear-view-cont">
+                      <canvas id="wear-view-canv" width="700" height="360"
+                        style="touch-action: none; cursor: inherit;"></canvas>
+                      <div id="wear-view-prev"><svg>
+                          <path d="M28.37 2L48 20.24 28 38V22.28"
+                            style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:4px;">
+                          </path>
+                          <circle cx="14.73" cy="19.95" style="fill:none;stroke-width:2px;" r="4.8">
+                          </circle>
+                          <circle cx="3.45" cy="20.42" r="2.4" style="fill:none;stroke-width:1px;">
+                          </circle>
+                        </svg></div>
+                      <div id="wear-view-next"><svg>
+                          <path d="M28.37 2L48 20.24 28 38V22.28"
+                            style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:4px;">
+                          </path>
+                          <circle cx="14.73" cy="19.95" style="fill:none;stroke-width:2px;" r="4.8">
+                          </circle>
+                          <circle cx="3.45" cy="20.42" r="2.4" style="fill:none;stroke-width:1px;">
+                          </circle>
+                        </svg></div>
+                      <div id="idReplaceWear"
+                        style="text-align: center; color: #aaa; position: absolute; bottom: 10px; width: 100%;">ID:
+                        <span id="wear-id-display">0</span></div>
+                    </div>
+
+                    <div id="wear-description-cont"><span id="wear-description-text"></span></div>
+
+                    <button id="btn-wear-equip"
+                      style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; border: none; padding: 10px 30px; border-radius: 5px; cursor: pointer; font-size: 16px;">Equip</button>
+                  </div>
                   <div id="coins-view" class="base-popup-view" style="display: none;"></div>
 
                 </div>
