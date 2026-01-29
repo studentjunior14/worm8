@@ -80,7 +80,7 @@ import { NetworkManager } from "./Game/NetworkManager";
         // PIXI App
         const app = new PIXI.Application();
         await app.init({
-            width: window.innerWidth, height: window.innerHeight, backgroundColor: 0x161616, antialias: false, resolution: 1, autoDensity: true, resizeTo: window
+            width: window.innerWidth, height: window.innerHeight, backgroundColor: 0x161616, antialias: true, resolution: window.devicePixelRatio || 1, autoDensity: true, resizeTo: window
         });
         app.ticker.maxFPS = 90;
         app.canvas.style.position = 'absolute'; app.canvas.style.top = '0'; app.canvas.style.left = '0'; app.canvas.style.zIndex = '-1';
