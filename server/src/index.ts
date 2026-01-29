@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 });
 
 // Handle SPA routing by returning index.html for unknown routes
-app.get('*', (req, res) => {
+app.get(/(.*)/, (req, res) => {
     res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 
