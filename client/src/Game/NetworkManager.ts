@@ -16,8 +16,8 @@ export class NetworkManager {
         return NetworkManager.instance;
     }
 
-    public join(name: string, skin: string) {
-        this.socket.emit('join', { name, skin });
+    public join(name: string, skin: string, accessories: number[]) {
+        this.socket.emit('join', { name, skin, accessories });
     }
 
     public sendInput(angle: number, boosting: boolean) {

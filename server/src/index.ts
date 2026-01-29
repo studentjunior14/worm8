@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
     console.log('Player connected:', socket.id);
 
     socket.on('join', (data) => {
-        const id = game.addPlayer(socket.id, data.name || "Player", data.skin || "skin_green");
+        const id = game.addPlayer(socket.id, data.name || "Player", data.skin || "skin_green", data.accessories || []);
         socket.emit('joined', { id });
     });
 

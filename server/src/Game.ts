@@ -112,7 +112,8 @@ export class Game {
             b: s.bodyPartsCount,
             ef: s.activeEffects,
             k: s.killCount,
-            h: s.hsCount
+            h: s.hsCount,
+            acc: s.accessories
         }));
 
         // Send full state? 
@@ -133,7 +134,7 @@ export class Game {
         });
     }
 
-    public addPlayer(socketId: string, name: string, skin: string) {
+    public addPlayer(socketId: string, name: string, skin: string, accessories: number[] = []) {
         // Find safe random pos
         let x = 5000, y = 5000;
         const center = new Vector2(5000, 5000);
@@ -172,6 +173,7 @@ export class Game {
 
         const id = uuidv4();
         const snake = new Snake(id, socketId, x, y, name, skin, false);
+        snake.accessories = accessories;
 
         // Send initial food to this player
         const allFood = FoodManager.getInstance().getAllFood();

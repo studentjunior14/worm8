@@ -72,6 +72,11 @@ export class SnakeController extends Component {
         if (data.k !== undefined) this.killCount = data.k;
         if (data.h !== undefined) this.hsCount = data.h;
 
+        // Sync Accessories
+        if (data.acc) {
+            this.updateAccessories(data.acc);
+        }
+
         // Name and Skin should be set on creation, but updated if needed
         if (this.name !== data.n) this.setName(data.n);
     }

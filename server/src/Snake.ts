@@ -12,6 +12,7 @@ export class Snake {
 
     public name: string = "Player";
     public skin: string = "skin_green";
+    public accessories: number[] = [];
 
     public score: number = 0;
     public killCount: number = 0;
