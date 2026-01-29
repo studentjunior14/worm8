@@ -1,0 +1,12 @@
+{
+  "name": "wormate-clone-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo for Wormate Clone",
+  "scripts": {
+    "start": "cd server && npm start",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

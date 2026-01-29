@@ -1,0 +1,232 @@
+
+
+  VITE v5.4.21  ready in 106 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+6:27:58 PM [vite] page reload src/main.ts
+6:31:26 PM [vite] page reload src/main.ts (x2)
+6:33:27 PM [vite] page reload src/Game/Components/SnakeController.ts
+6:33:28 PM [vite] Pre-transform error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". 
+6:33:28 PM [vite] Pre-transform error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+6:33:28 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts"
+6:33:28 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+  Plugin: vite:import-analysile: /Users/muslimjunior/Downloads/WormateClone/client/src/Game/Components/SnakeController.ts:3:24
+  1  |  import { Component } from "../../Engine/Component";
+  2  |  import { InputManager } from "../../Engine/InputManager";
+  3  |  import { Vector2 } from "../../../shared/Vector2";
+     |                           ^
+  4  |  import { WORLD_SIZE, GAME_SETTINGS } from "../../../shared/constants";
+  5  |  export class SnakeController extends Component {
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chu
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-B
+      at async viteTransformMiddleware (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+6:33:28 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts"
+6:33:28 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/muslimjunior/Downloads/WormateClone/client/src/Game/Components/SnakeController.ts:3:24
+  1  |  import { Component } from "../../Engine/Component";
+  2  |  import { InputManager } from "../../Engine/InputManager";
+  3  |  import { Vector2 } from "../../../shared/Vector2";
+     |                           ^
+  4  |  import { WORLD_SIZE, GAME_SETTINGS } from "../../../shared/constants";
+  5  |  export class SnakeController extends Component {
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chu
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-B
+      at async viteTransformMiddleware (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24) (x2)
+6:34:26 PM [vite] page reload src/main.ts
+6:34:27 PM [vite] Pre-transform error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". 
+6:34:27 PM [vite] Pre-transform error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+6:34:27 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts"
+6:34:27 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/muslimjunior/Downloads/WormateClone/client/src/Game/Components/SnakeController.ts:3:24
+  1  |  import { Component } from "../../Engine/Component";
+  2  |  import { InputManager } from "../../Engine/InputManager";
+  3  |  import { Vector2 } from "../../../shared/Vector2";
+     |                           ^
+  4  |  import { WORLD_SIZE, GAME_SETTINGS } from "../../../shared/constants";
+  5  |  export class SnakeController extends Component {
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chu
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+6:34:27 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts"
+6:34:27 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/muslimjunior/Downloads/WormateClone/client/src/Game/Components/SnakeController.ts:3:24
+  1  |  import { Component } from "../../Engine/Component";
+  2  |  import { InputManager } from "../../Engine/InputManager";
+  3  |  import { Vector2 } from "../../../shared/Vector2";
+     |                           ^
+  4  |  import { WORLD_SIZE, GAME_SETTINGS } from "../../../shared/constants";
+  5  |  export class SnakeController extends Component {
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chu
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27) (x2)
+6:34:49 PM [vite] page reload src/main.ts
+6:34:50 PM [vite] Pre-transform error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". 
+6:34:50 PM [vite] Pre-transform error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+6:34:50 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts"
+6:34:50 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/muslimjunior/Downloads/WormateClone/client/src/Game/Components/SnakeController.ts:3:24
+  1  |  import { Component } from "../../Engine/Component";
+  2  |  import { InputManager } from "../../Engine/InputManager";
+  3  |  import { Vector2 } from "../../../shared/Vector2";
+     |                           ^
+  4  |  import { WORLD_SIZE, GAME_SETTINGS } from "../../../shared/constants";
+  5  |  export class SnakeController extends Component {
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chu
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-B
+      at async viteTransformMiddleware (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24)
+6:34:50 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts"
+6:34:50 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/muslimjunior/Downloads/WormateClone/client/src/Game/Components/SnakeController.ts:3:24
+  1  |  import { Component } from "../../Engine/Component";
+  2  |  import { InputManager } from "../../Engine/InputManager";
+  3  |  import { Vector2 } from "../../../shared/Vector2";
+     |                           ^
+  4  |  import { WORLD_SIZE, GAME_SETTINGS } from "../../../shared/constants";
+  5  |  export class SnakeController extends Component {
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chu
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+      at async viteTransformMiddleware (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-B
+      at async viteTransformMiddleware (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:62106:24) (x2)
+6:35:25 PM [vite] page reload src/main.ts
+6:35:26 PM [vite] Pre-transform error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". 
+6:35:26 PM [vite] Pre-transform error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+6:35:26 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts"
+6:35:26 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/muslimjunior/Downloads/WormateClone/client/src/Game/Components/SnakeController.ts:3:24
+  1  |  import { Component } from "../../Engine/Component";
+  2  |  import { InputManager } from "../../Engine/InputManager";
+  3  |  import { Vector2 } from "../../../shared/Vector2";
+     |                           ^
+  4  |  import { WORLD_SIZE, GAME_SETTINGS } from "../../../shared/constants";
+  5  |  export class SnakeController extends Component {
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chu
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27)
+6:35:26 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts"
+6:35:26 PM [vite] Internal server error: Failed to resolve import "../../../shared/Vector2" from "src/Game/Components/SnakeController.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/muslimjunior/Downloads/WormateClone/client/src/Game/Components/SnakeController.ts:3:24
+  1  |  import { Component } from "../../Engine/Component";
+  2  |  import { InputManager } from "../../Engine/InputManager";
+  3  |  import { Vector2 } from "../../../shared/Vector2";
+     |                           ^
+  4  |  import { WORLD_SIZE, GAME_SETTINGS } from "../../../shared/constants";
+  5  |  export class SnakeController extends Component {
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks
+      at TransformPluginContext._formatError (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49258:41)
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK
+      at TransformPluginContext.error (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49253:16)
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:
+      at normalizeUrl (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64307:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+      at async file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64439:39
+      at async Promise.all (index 2)
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chu
+      at async TransformPluginContext.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:64366:7)
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep
+      at async PluginContainer.transform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:49099:18)
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa
+      at async loadAndTransform (file:///Users/muslimjunior/Downloads/WormateClone/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51978:27) (x2)
+6:38:58 PM [vite] page reload src/Game/Components/SnakeController.ts
+6:43:16 PM [vite] page reload src/Game/Components/SnakeController.ts (x2)
+6:44:56 PM [vite] page reload src/Engine/GameObject.ts
+cd client

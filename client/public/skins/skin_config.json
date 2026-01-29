@@ -1,0 +1,94 @@
+{
+    "skins": {
+        "skin_green": {
+            "id": 1,
+            "category": "Simple",
+            "glows": [
+                "#8DD13E",
+                "#8DD13E",
+                "#8DD13E",
+                "#8DD13E",
+                "#8DD13E",
+                "#8DD13E",
+                "#8DD13E",
+                "#8DD13E",
+                "#8DD13E"
+            ]
+        },
+        "skin_tr": {
+            "id": 2,
+            "category": "Flags",
+            "glows": [
+                "#ff0000",
+                "#ffffff",
+                "#ff0000",
+                "#ffffff",
+                "#ff0000",
+                "#ffffff",
+                "#ff0000",
+                "#ffffff",
+                "#ff0000"
+            ]
+        },
+        "skin_blue": {
+            "id": 3,
+            "category": "Simple",
+            "glows": [
+                "#0000ff",
+                "#0022ff",
+                "#0044ff",
+                "#0066ff",
+                "#0088ff",
+                "#00aaff",
+                "#00ccff",
+                "#00eeff",
+                "#00ffff"
+            ]
+        },
+        "skin_red": {
+            "id": 4,
+            "category": "Simple",
+            "glows": [
+                "#ff0000",
+                "#dd0000",
+                "#bb0000",
+                "#990000",
+                "#770000",
+                "#550000",
+                "#330000",
+                "#110000",
+                "#ff0000"
+            ]
+        },
+        "skin_yellow": {
+            "id": 5,
+            "category": "Simple",
+            "glows": [
+                "#ffff00",
+                "#ffee00",
+                "#ffdd00",
+                "#ffcc00",
+                "#ffbb00",
+                "#ffaa00",
+                "#ff9900",
+                "#ff8800",
+                "#ffff00"
+            ]
+        },
+        "skin_space": {
+            "id": 6,
+            "category": "Space",
+            "glows": [
+                "#8800ff",
+                "#7700ee",
+                "#6600dd",
+                "#5500cc",
+                "#4400bb",
+                "#3300aa",
+                "#220099",
+                "#110088",
+                "#8800ff"
+            ]
+        }
+    }
+}
