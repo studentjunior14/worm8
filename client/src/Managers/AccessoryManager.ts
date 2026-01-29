@@ -279,6 +279,20 @@ export class AccessoryManager {
         return Array.from(this.equippedAccessories.values());
     }
 
+    public getAccessoryConfig(id: number): AccessoryConfig | null {
+        if (!this.config) return null;
+        for (const key in this.config.accessories) {
+            if (this.config.accessories[key].id === id) {
+                return this.config.accessories[key];
+            }
+        }
+        return null;
+    }
+
+    public getTexture(id: number): PIXI.Texture | null {
+        return this.loadedTextures[id] || null;
+    }
+
     // For initializing from storage
     loadSaved() {
         try {
