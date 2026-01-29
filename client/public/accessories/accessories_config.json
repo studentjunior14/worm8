@@ -5,7 +5,7 @@
             "category": "glasses",
             "src": "/accessories/glasses/glasses_01.png",
             "anchor": {
-                "x": 0.75,
+                "x": 0.70,
                 "y": 0.5
             },
             "scale": {
@@ -26,8 +26,8 @@
                 "y": 0.5
             },
             "scale": {
-                "x": 0.9,
-                "y": 0.9
+                "x": 0.1,
+                "y": 0.1
             },
             "offset": {
                 "x": 0,
@@ -43,8 +43,8 @@
                 "y": 0.5
             },
             "scale": {
-                "x": 0.7,
-                "y": 0.7
+                "x": 0.1,
+                "y": 0.1
             },
             "offset": {
                 "x": 0,
@@ -56,12 +56,12 @@
             "category": "eyes",
             "src": "/accessories/eyes/eyes_01.png",
             "anchor": {
-                "x": 0.75,
+                "x": 0.70,
                 "y": 0.5
             },
             "scale": {
-                "x": 0.1,
-                "y": 0.1
+                "x": 0.3,
+                "y": 0.3
             },
             "offset": {
                 "x": 0,
