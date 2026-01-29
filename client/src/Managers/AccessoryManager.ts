@@ -21,14 +21,14 @@ export class AccessoryManager {
     private config: ConfigFile | null = null;
     private loadedTextures: { [key: number]: PIXI.Texture } = {};
     private currentCategory: string = 'glasses';
-    private selectedAccessoryId: number = 0; // 0 = none
+    private equippedAccessories: Map<string, number> = new Map(); // Category -> ID
 
     // UI Elements
     private canvas: HTMLCanvasElement | null = null;
     private previewApp: PIXI.Application | null = null;
     private previewContainer: PIXI.Container = new PIXI.Container();
     private previewSnakeHead: PIXI.Graphics | null = null;
-    private previewAccessorySprite: PIXI.Sprite | null = null;
+    private previewSprites: Map<string, PIXI.Sprite> = new Map();
 
     // Store State
     private categoryItems: AccessoryConfig[] = [];
@@ -56,6 +56,7 @@ export class AccessoryManager {
         }
 
         this.setupUI();
+        this.loadSaved(); // Load first
         this.selectCategory('glasses');
     }
 
@@ -71,7 +72,7 @@ export class AccessoryManager {
 
         document.getElementById('wear-view-prev')?.addEventListener('click', () => this.prevItem());
         document.getElementById('wear-view-next')?.addEventListener('click', () => this.nextItem());
-        document.getElementById('btn-wear-equip')?.addEventListener('click', () => this.equipCurrent());
+        document.getElementById('btn-wear-equip')?.addEventListener('click', () => this.toggleCurrent());
 
         // Canvas
         this.canvas = document.getElementById('wear-view-canv') as HTMLCanvasElement;
@@ -116,9 +117,8 @@ export class AccessoryManager {
         this.previewContainer.y = 180;
         this.previewContainer.addChild(head);
 
-        // Placeholder for accessory
-        this.previewAccessorySprite = new PIXI.Sprite();
-        this.previewContainer.addChild(this.previewAccessorySprite);
+        // Placeholder for accessorie sprites
+        // We will create sprites dynamically as needed
     }
 
     private animatePreview(dt: number) {
@@ -171,57 +171,134 @@ export class AccessoryManager {
         this.updatePreview(this.categoryItems[this.currentItemIndex]);
     }
 
-    updatePreview(item: AccessoryConfig | null) {
-        if (!this.previewAccessorySprite || !this.previewSnakeHead) return;
+    updatePreview(previewItem: AccessoryConfig | null) {
+        if (!this.previewSnakeHead) return;
 
-        if (item && this.loadedTextures[item.id]) {
-            this.previewAccessorySprite.texture = this.loadedTextures[item.id];
-            this.previewAccessorySprite.visible = true;
+        // We want to show:
+        // 1. All EQUIPPED items from OTHER categories.
+        // 2. The PREVIEW item for the CURRENT category (overriding equipped).
 
-            // Align with head (Head radius is 40)
-            // Config anchor is relative to the sprite, position is relative to head center (0,0)
-            this.previewAccessorySprite.anchor.set(item.anchor.x, item.anchor.y);
-            this.previewAccessorySprite.scale.set(item.scale.x * 0.8, item.scale.y * 0.8); // Scale down slightly for menu
-            this.previewAccessorySprite.position.set(item.offset.x, item.offset.y);
+        // Get list of items to render
+        const itemsToRender: AccessoryConfig[] = [];
 
-            document.getElementById('wear-id-display')!.innerText = item.id.toString();
+        // Add equipped from other categories
+        this.equippedAccessories.forEach((id, cat) => {
+            if (cat !== this.currentCategory && this.config) {
+                const item = Object.values(this.config.accessories).find(a => a.id === id);
+                if (item) itemsToRender.push(item);
+            }
+        });
+
+        // Add current preview item
+        if (previewItem) itemsToRender.push(previewItem);
+
+        // Render logic
+        // Clear existing sprites or reuse? Reuse map by category is easiest but we have a map.
+        // Let's hide all first
+        this.previewSprites.forEach(s => s.visible = false);
+
+        itemsToRender.forEach(item => {
+            let sprite = this.previewSprites.get(item.category);
+            if (!sprite) {
+                sprite = new PIXI.Sprite();
+                this.previewContainer.addChild(sprite);
+                this.previewSprites.set(item.category, sprite);
+            }
+            if (this.loadedTextures[item.id]) {
+                sprite.texture = this.loadedTextures[item.id];
+                sprite.visible = true;
+                sprite.anchor.set(item.anchor.x, item.anchor.y);
+                // Preview scale tweak 0.8
+                sprite.scale.set(item.scale.x * 0.8, item.scale.y * 0.8);
+                sprite.position.set(item.offset.x, item.offset.y);
+
+                // Z-Index by category? 
+                // Simple sort order: skin < eyes < glasses < mouths < hats
+                // Current child order defines z-index.
+                this.sortPreviewSprites();
+            }
+        });
+
+        if (previewItem) {
+            document.getElementById('wear-id-display')!.innerText = previewItem.id.toString();
+            this.updateEquipButtonState(previewItem);
         } else {
-            this.previewAccessorySprite.visible = false;
             document.getElementById('wear-id-display')!.innerText = "None";
         }
     }
 
-    equipCurrent() {
-        if (this.currentItemIndex >= 0 && this.categoryItems[this.currentItemIndex]) {
-            this.selectedAccessoryId = this.categoryItems[this.currentItemIndex].id;
-            console.log("Equipped Accessory:", this.selectedAccessoryId);
-            // In a real app, save to localStorage here
-            localStorage.setItem('wormate_accessory', this.selectedAccessoryId.toString());
+    private sortPreviewSprites() {
+        const order = ['eyes', 'mouths', 'glasses', 'hats'];
+        this.previewSprites.forEach((sprite, cat) => {
+            const idx = order.indexOf(cat);
+            sprite.zIndex = idx + 10;
+        });
+        this.previewContainer.sortableChildren = true;
+    }
+
+    private updateEquipButtonState(item: AccessoryConfig) {
+        const btn = document.getElementById('btn-wear-equip');
+        if (!btn) return;
+
+        const isEquipped = this.equippedAccessories.get(item.category) === item.id;
+        if (isEquipped) {
+            btn.innerText = "Unequip";
+            btn.classList.add('equipped-state'); // Add logic in CSS if needed
         } else {
-            this.selectedAccessoryId = 0;
-            localStorage.removeItem('wormate_accessory');
+            btn.innerText = "Equip";
+            btn.classList.remove('equipped-state');
         }
     }
 
-    getAccessoryId(): number {
-        return this.selectedAccessoryId;
+    toggleCurrent() {
+        if (this.currentItemIndex >= 0 && this.categoryItems[this.currentItemIndex]) {
+            const item = this.categoryItems[this.currentItemIndex];
+            const current = this.equippedAccessories.get(item.category);
+
+            if (current === item.id) {
+                // Unequip
+                this.equippedAccessories.delete(item.category);
+                console.log("Unequipped:", item.category);
+            } else {
+                // Equip (replace)
+                this.equippedAccessories.set(item.category, item.id);
+                console.log("Equipped:", item.id);
+            }
+            this.saveEquipped();
+            this.updateEquipButtonState(item);
+            this.updatePreview(item); // Refresh view
+        }
     }
 
-    // Called by Game Loop to get sprite config
-    getAccessoryConfig(id: number): AccessoryConfig | undefined {
-        if (!this.config) return undefined;
-        return Object.values(this.config.accessories).find(a => a.id === id);
+    private saveEquipped() {
+        const obj = Object.fromEntries(this.equippedAccessories);
+        localStorage.setItem('wormate_accessories_map', JSON.stringify(obj));
     }
 
-    getTexture(id: number): PIXI.Texture | undefined {
-        return this.loadedTextures[id];
+    getEquippedAccessoryIds(): number[] {
+        return Array.from(this.equippedAccessories.values());
     }
 
     // For initializing from storage
     loadSaved() {
-        const saved = localStorage.getItem('wormate_accessory');
-        if (saved) {
-            this.selectedAccessoryId = parseInt(saved);
+        try {
+            const saved = localStorage.getItem('wormate_accessories_map');
+            if (saved) {
+                const obj = JSON.parse(saved);
+                this.equippedAccessories = new Map(Object.entries(obj));
+            } else {
+                // Legacy check
+                const legacy = localStorage.getItem('wormate_accessory');
+                if (legacy) {
+                    // Try to guess category or just clear
+                    // We need config to know category.
+                    // Deferred until config load? 
+                    // Safe to just clear for new system.
+                    localStorage.removeItem('wormate_accessory');
+                }
+            }
+        } catch (e) {
+            console.error("Failed to load saved accessories", e);
         }
     }
 }

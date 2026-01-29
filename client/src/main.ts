@@ -152,10 +152,12 @@ import { AccessoryManager } from "./Managers/AccessoryManager";
                     gameObjects.push(go);
                     snake = ctrl;
 
-                    playerController = ctrl;
-                    cameraTarget = go;
-                    // Set Accessory
-                    ctrl.setAccessory(AccessoryManager.instance.getAccessoryId());
+                    if (ctrl.isPlayer) {
+                        playerController = ctrl;
+                        cameraTarget = go;
+                        // Set Accessories
+                        ctrl.updateAccessories(AccessoryManager.instance.getEquippedAccessoryIds());
+                    }
                 }
                 snake.updateFromServer(sData);
             });
