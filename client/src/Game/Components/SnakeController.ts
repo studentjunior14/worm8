@@ -398,8 +398,7 @@ export class SnakeController extends Component {
     }
 
     private addAccessory(id: number) {
-        // Dynamically import or use global
-        const { AccessoryManager } = require('../../Managers/AccessoryManager');
+        // Use global import
         const manager = AccessoryManager.instance;
         if (!manager) return;
 
@@ -407,6 +406,7 @@ export class SnakeController extends Component {
         const texture = manager.getTexture(id);
 
         if (config && texture) {
+            console.log(`SnakeController: Adding accessory ${id} sprite. Scale:`, config.scale);
             const sp = new PIXI.Sprite(texture);
             sp.anchor.set(config.anchor.x, config.anchor.y);
 

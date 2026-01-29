@@ -156,7 +156,9 @@ import { AccessoryManager } from "./Managers/AccessoryManager";
                         playerController = ctrl;
                         cameraTarget = go;
                         // Set Accessories
-                        ctrl.updateAccessories(AccessoryManager.instance.getEquippedAccessoryIds());
+                        const accIds = AccessoryManager.instance.getEquippedAccessoryIds();
+                        console.log("Main.ts: Setting accessories for player:", accIds);
+                        ctrl.updateAccessories(accIds);
                     }
                 }
                 snake.updateFromServer(sData);
