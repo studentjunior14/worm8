@@ -253,7 +253,8 @@ import { AccessoryManager } from "./Managers/AccessoryManager";
 
             // JOIN SERVER
             let skinName = selectedSkin.replace('.png', '').replace('skin_', '');
-            net.join(playerName, skinName);
+            const accIds = AccessoryManager.instance.getEquippedAccessoryIds();
+            net.join(playerName, skinName, accIds);
         }
 
         // Removed old showGameOver as logic moved to listener
