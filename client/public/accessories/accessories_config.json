@@ -5,12 +5,12 @@
             "category": "glasses",
             "src": "/accessories/glasses/glasses_01.png",
             "anchor": {
-                "x": 0.5,
+                "x": 0.75,
                 "y": 0.5
             },
             "scale": {
-                "x": 0.1,
-                "y": 0.1
+                "x": 0.3,
+                "y": 0.3
             },
             "offset": {
                 "x": 0,
