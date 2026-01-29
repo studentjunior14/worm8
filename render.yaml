@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: wormate-clone
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
