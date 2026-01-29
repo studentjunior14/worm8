@@ -82,7 +82,7 @@ import { NetworkManager } from "./Game/NetworkManager";
         await app.init({
             width: window.innerWidth, height: window.innerHeight, backgroundColor: 0x161616, antialias: true, resolution: window.devicePixelRatio || 1, autoDensity: true, resizeTo: window
         });
-        app.ticker.maxFPS = 90;
+        // app.ticker.maxFPS = 90; // Removed in favor of manual loop
         app.canvas.style.position = 'absolute'; app.canvas.style.top = '0'; app.canvas.style.left = '0'; app.canvas.style.zIndex = '-1';
         app.canvas.style.display = 'none';
         document.body.appendChild(app.canvas);
@@ -457,41 +457,69 @@ import { NetworkManager } from "./Game/NetworkManager";
             spawnFloatingText("WELL DONE!", 0xffff00);
         });
 
-        app.ticker.add((ticker) => {
-            const dt = ticker.deltaTime / 60;
-            if (isGamePaused) return; // Frozen state
-            if (!isGameRunning && !isGameOver) return; // Main menu state
+        // Strict 90 FPS Loop
+        app.ticker.stop();
+        const TARGET_FPS = 90;
+        const FRAME_DELAY = 1000 / TARGET_FPS;
+        let lastTime = performance.now();
+        let fpsTimer = 0;
+        let frames = 0;
+        let displayFPS = 60;
 
-            // Update Death Marker Timer
-            if (deathMarkerTimer > 0) deathMarkerTimer -= dt;
+        function gameLoop(time: number) {
+            requestAnimationFrame(gameLoop);
+            const elapsed = time - lastTime;
 
-            for (let i = floatingTexts.length - 1; i >= 0; i--) {
-                const ft = floatingTexts[i];
-                ft.life -= dt;
-                ft.text.y -= ft.velocity * (dt * 60);
-                ft.text.alpha = Math.min(ft.life, 1.0);
-                if (ft.life <= 0) {
-                    uiContainer.removeChild(ft.text);
-                    ft.text.destroy();
-                    floatingTexts.splice(i, 1);
+            if (elapsed >= FRAME_DELAY) {
+                lastTime = time - (elapsed % FRAME_DELAY);
+                const dt = elapsed / 1000; // Seconds
+
+                // FPS Calculation
+                fpsTimer += elapsed;
+                frames++;
+                if (fpsTimer >= 1000) {
+                    displayFPS = frames;
+                    frames = 0;
+                    fpsTimer = 0;
                 }
-            }
 
-            // Only update registered objects
-            for (const go of gameObjects) go.update(dt);
-            foodManager.update(dt);
+                if (isGamePaused) { app.render(); return; }
+                if (!isGameRunning && !isGameOver) { app.render(); return; }
 
-            if (cameraTarget && cameraTarget.isActive) {
-                const tx = -cameraTarget.position.x * cameraScale + app.screen.width / 2;
-                const ty = -cameraTarget.position.y * cameraScale + app.screen.height / 2;
-                worldContainer.position.set(tx, ty);
-                worldContainer.scale.set(cameraScale);
+                // Update Death Marker Timer
+                if (deathMarkerTimer > 0) deathMarkerTimer -= dt;
+
+                for (let i = floatingTexts.length - 1; i >= 0; i--) {
+                    const ft = floatingTexts[i];
+                    ft.life -= dt;
+                    ft.text.y -= ft.velocity * (dt * 60);
+                    ft.text.alpha = Math.min(ft.life, 1.0);
+                    if (ft.life <= 0) {
+                        uiContainer.removeChild(ft.text);
+                        ft.text.destroy();
+                        floatingTexts.splice(i, 1);
+                    }
+                }
+
+                // Only update registered objects
+                for (const go of gameObjects) go.update(dt);
+                foodManager.update(dt);
+
+                if (cameraTarget && cameraTarget.isActive) {
+                    const tx = -cameraTarget.position.x * cameraScale + app.screen.width / 2;
+                    const ty = -cameraTarget.position.y * cameraScale + app.screen.height / 2;
+                    worldContainer.position.set(tx, ty);
+                    worldContainer.scale.set(cameraScale);
+                }
+                let doSlowUpdate = false;
+                if (hudTimer >= 1.0) { doSlowUpdate = true; hudTimer = 0; }
+                hudTimer += dt;
+                updateHUD(displayFPS, doSlowUpdate);
+
+                app.render();
             }
-            let doSlowUpdate = false;
-            if (hudTimer >= 1.0) { doSlowUpdate = true; hudTimer = 0; }
-            hudTimer += dt;
-            updateHUD(ticker.FPS, doSlowUpdate);
-        });
+        }
+        requestAnimationFrame(gameLoop);
 
         function updateHUD(fps: number, doSlowUpdate: boolean) {
             fpsText.x = app.screen.width - 150;
