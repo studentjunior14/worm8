@@ -18,10 +18,6 @@ export class SnakeController extends Component {
 
     private nameLabel: PIXI.Text | null = null;
 
-    // Server state target
-    private targetPosition: Vector2 | null = null;
-    private targetRotation: number = 0;
-
     public width: number = GAME_SETTINGS.SNAKE_START_WIDTH;
     public pathHistory: Vector2[] = [];
     public bodyPartsCount: number = 20;
@@ -61,10 +57,26 @@ export class SnakeController extends Component {
         }
     }
 
+    // Snapshot Interpolation State
+    private serverUpdates: { time: number, x: number, y: number, rot: number }[] = [];
+    private readonly INTERPOLATION_DELAY = 100; // 100ms delay for smooth buffering
+
     public updateFromServer(data: any) {
         // data: { x, y, rot, s, sk, n, w, b, ef }
-        this.targetPosition = new Vector2(data.x, data.y);
-        this.targetRotation = data.rot;
+
+        // Push new snapshot with arrival time
+        this.serverUpdates.push({
+            time: Date.now(),
+            x: data.x,
+            y: data.y,
+            rot: data.rot
+        });
+
+        // Keep buffer size manageable (e.g., last 20 updates)
+        if (this.serverUpdates.length > 20) {
+            this.serverUpdates.shift();
+        }
+
         this.score = data.s;
         this.width = data.w;
         if (data.b) this.bodyPartsCount = data.b;
@@ -126,17 +138,56 @@ export class SnakeController extends Component {
             NetworkManager.getInstance().sendInput(angle, input.isMouseDown);
         }
 
-        // Interpolate Logic
-        if (this.targetPosition) {
-            // Lerp factor
-            const t = Math.min(dt * 5, 1.0);
-            this.gameObject.position = this.gameObject.position.lerp(this.targetPosition, t);
+        // --- SNAPSHOT INTERPOLATION ---
+        const renderTime = Date.now() - this.INTERPOLATION_DELAY;
 
-            // Rotation lerp
-            let diff = this.targetRotation - this.gameObject.rotation;
+        // Find the two snapshots surrounding renderTime
+        let prev = null;
+        let next = null;
+
+        for (let i = this.serverUpdates.length - 1; i >= 0; i--) {
+            const snap = this.serverUpdates[i];
+            if (snap.time <= renderTime) {
+                prev = snap;
+                next = this.serverUpdates[i + 1]; // Might be undefined if at end
+                break;
+            }
+        }
+
+        if (prev && next) {
+            // Interpolate between prev and next
+            const total = next.time - prev.time;
+            const elapsed = renderTime - prev.time;
+            const ratio = Math.max(0, Math.min(1, elapsed / total));
+
+            const lerpX = prev.x + (next.x - prev.x) * ratio;
+            const lerpY = prev.y + (next.y - prev.y) * ratio;
+
+            this.gameObject.position.x = lerpX;
+            this.gameObject.position.y = lerpY;
+
+            // Rotation Interpolation (shortest path)
+            let diff = next.rot - prev.rot;
             while (diff > Math.PI) diff -= Math.PI * 2;
             while (diff < -Math.PI) diff += Math.PI * 2;
-            this.gameObject.rotation += diff * t;
+            this.gameObject.rotation = prev.rot + diff * ratio;
+
+        } else if (prev && !next) {
+            // We are ahead of the buffer (or waiting for new data)? 
+            // Extrapolate or just snap to latest? 
+            // For now, snap to latest to prevent overshoot ghosts, or just stay at prev.
+            // Actually, if we only have 'prev' (which is <= renderTime), it means we ran out of future packets.
+            // Snap to it.
+            this.gameObject.position.x = prev.x;
+            this.gameObject.position.y = prev.y;
+            this.gameObject.rotation = prev.rot;
+        } else if (!prev && this.serverUpdates.length > 0) {
+            // All updates are in the future? (Shouldn't happen with delay, unless huge latency spike)
+            // Snap to the oldest we have
+            const oldest = this.serverUpdates[0];
+            this.gameObject.position.x = oldest.x;
+            this.gameObject.position.y = oldest.y;
+            this.gameObject.rotation = oldest.rot;
         }
 
         this.updateHistory(dt);
