@@ -129,7 +129,7 @@ export class SnakeController extends Component {
         // Interpolate Logic
         if (this.targetPosition) {
             // Lerp factor
-            const t = Math.min(dt * 10, 1.0);
+            const t = Math.min(dt * 5, 1.0);
             this.gameObject.position = this.gameObject.position.lerp(this.targetPosition, t);
 
             // Rotation lerp
