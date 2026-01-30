@@ -9,6 +9,7 @@ export class Game {
     private io: Server;
     private lastTime: number = 0;
     private intervalId: NodeJS.Timeout | null = null;
+    private tickCount: number = 0;
 
     // 60 ticks per second
     private readonly TICK_RATE = 20; // 50ms (for "cheapest" bandwidth), maybe 30 or 60 for smoothness. 
@@ -77,8 +78,11 @@ export class Game {
         // Maintain 20 bots
         this.maintainBots();
 
-        // Broadcast
-        this.broadcastState();
+        // Broadcast (Limit to 30Hz = every 2nd tick)
+        if (this.tickCount % 2 === 0) {
+            this.broadcastState();
+        }
+        this.tickCount++;
     }
 
     private maintainBots() {
